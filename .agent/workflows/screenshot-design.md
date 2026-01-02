@@ -14,9 +14,11 @@ Auto-select if only one, or ask user.
 ## Step 2: Start the Dev Server
 
 Use `run_command` to start the dev server if not running:
+
 ```bash
 npm run dev
 ```
+
 (Set `WaitMsBeforeAsync` to allow it to start).
 
 ## Step 3: Capture the Screenshot

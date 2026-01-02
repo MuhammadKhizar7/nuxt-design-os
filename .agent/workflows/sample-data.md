@@ -21,6 +21,7 @@ Stop here if the spec doesn't exist.
 Check if `/product/data-model/data-model.md` exists.
 
 **If it exists:**
+
 - Read the file to understand the global entity definitions
 - Entity names in your sample data should match the global data model
 - Use the descriptions and relationships as a guide
@@ -144,6 +145,7 @@ Example structure:
 ```
 
 The `_meta` descriptions should:
+
 - Use plain, non-technical language
 - Explain what each model represents in the context of the user's product
 - Describe relationships in terms of "contains", "belongs to", "links to", etc.

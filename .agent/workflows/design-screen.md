@@ -10,14 +10,14 @@ You are helping the user create a screen design for a section of their product. 
 
 First, identify the target section and verify that `spec.md`, `data.json`, and `types.ts` all exist.
 
-Read `/public/product/roadmap.md` to get the list of available sections.
+Read `/product/roadmap.md` to get the list of available sections.
 
 If there's only one section, auto-select it. If there are multiple sections, use the `notify_user` tool to ask which section the user wants to create a screen design for.
 
 Then verify all required files exist:
 
-- `public/product/sections/[section-id]/spec.md`
-- `public/product/sections/[section-id]/data.json`
+- `product/sections/[section-id]/spec.md`
+- `product/sections/[section-id]/data.json`
 - `types/section.ts` (or specific section types if split)
 
 If spec.md doesn't exist:
@@ -31,15 +31,18 @@ If data.json doesn't exist:
 Check for optional enhancements:
 
 **Design Tokens:**
-- Check if `public/product/design-system/colors.json` exists
-- Check if `public/product/design-system/typography.json` exists
+
+- Check if `product/design-system/colors.json` exists
+- Check if `product/design-system/typography.json` exists
 
 **Shell:**
+
 - Check if `app/components/shell/AppShell.vue` exists
 
 ## Step 3: Analyze Requirements
 
 Read and analyze:
+
 1. **spec.md**
 2. **data.json**
 
@@ -58,6 +61,7 @@ Refer to best practices for high-quality Vue 3 + Tailwind implementations.
 Create the main component file at `app/components/sections/[section-id]/[ViewName].vue`.
 
 ### Component Structure
+
 - Script Setup (TS)
 - Props definition (using types)
 - Emits definition
@@ -65,6 +69,7 @@ Create the main component file at `app/components/sections/[section-id]/[ViewNam
 - Styles (Tailwind)
 
 **Example:**
+
 ```vue
 <script setup lang="ts">
 import type { X } from '@/types/section'
@@ -73,6 +78,7 @@ import type { X } from '@/types/section'
 ```
 
 ### Design Requirements
+
 - Mobile responsive (Tailwind `sm:`, `md:`, `lg:`)
 - Dark mode support (`dark:` classes)
 - Use design tokens if available
@@ -86,12 +92,14 @@ Create sub-components at `app/components/sections/[section-id]/[SubComponent].vu
 Create a preview wrapper at `app/pages/sections/[section-id]/screen-designs/[ViewName].vue`.
 
 This wrapper:
-- Imports sample data from `public/product/sections/[section-id]/data.json` (or uses `useSectionData` composable!)
+
+- Imports sample data from `product/sections/[section-id]/data.json` (or uses `useSectionData` composable!)
 - Passes data to the component
 - Handles events with console.logs
 - Renders inside AppShell if available
 
 **Example using composables:**
+
 ```vue
 <script setup lang="ts">
 import { useSectionData } from '~/app/composables/useSectionData'
@@ -102,5 +110,6 @@ import { useSectionData } from '~/app/composables/useSectionData'
 ## Step 9: Confirm and Next Steps
 
 Notify user that the screen design is created and where to find it.
+
 - Component: `app/components/sections/[section-id]/[ViewName].vue`
 - Preview: `app/pages/sections/[section-id]/screen-designs/[ViewName].vue`

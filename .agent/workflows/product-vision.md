@@ -21,9 +21,11 @@ After receiving their input, use the AskUserQuestion tool to ask 3-5 targeted qu
 - **The main features** that make this possible
 
 **Important:** If the user hasn't already provided a product name, ask them:
+
 - "What would you like to call this product? (A short, memorable name)"
 
 Other example clarifying questions (adapt based on their input):
+
 - "Who is the primary user of this product? Can you describe them?"
 - "What's the single biggest pain point you're addressing?"
 - "How do people currently solve this problem without your product?"
@@ -42,10 +44,12 @@ Once you have enough information, present a draft summary:
 [Draft 1-3 sentence description]
 
 **Problems & Solutions:**
+
 1. [Problem] → [Solution]
 2. [Problem] → [Solution]
 
 **Key Features:**
+
 - Feature 1
 - Feature 2
 - Feature 3

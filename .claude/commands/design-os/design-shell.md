@@ -13,6 +13,7 @@ First, verify prerequisites exist:
 If overview or roadmap are missing:
 
 "Before designing the shell, you need to define your product and sections. Please run:
+
 1. `/product-vision` — Define your product
 2. `/product-roadmap` — Define your sections"
 
@@ -65,16 +66,19 @@ Once you understand their preferences:
 **Layout Pattern:** [Sidebar/Top Nav/Minimal]
 
 **Navigation Structure:**
+
 - [Nav Item 1] → [Section]
 - [Nav Item 2] → [Section]
 - [Nav Item 3] → [Section]
 - [Additional items like Settings, Help]
 
 **User Menu:**
+
 - Location: [Top right / Bottom of sidebar]
 - Contents: Avatar, user name, logout
 
 **Responsive Behavior:**
+
 - Desktop: [How it looks]
 - Mobile: [How it adapts]
 
@@ -118,6 +122,7 @@ Create `/product/shell/spec.md`:
 Create the shell components at `app/components/shell/`:
 
 ### AppShell.vue
+
 The main wrapper component that accepts slots and provides the layout structure.
 
 ```vue
@@ -151,21 +156,25 @@ const emit = defineEmits<{
 ```
 
 ### MainNav.vue
+
 The navigation component (sidebar or top nav based on the chosen pattern).
 
 ### UserMenu.vue
+
 The user menu with avatar and dropdown.
 
 ### No Index File Needed
+
 Vue auto-imports handle this.
 
 **Component Requirements:**
+
 - Use props for all data and events for callbacks (portable)
 - Apply design tokens if they exist (colors, fonts)
 - Support light and dark mode with `dark:` variants
 - Be mobile responsive
 - Use Tailwind CSS for styling
-- Use `lucide-vue-next` for icons
+- Use `nuxt ui UIcon` for icons
 
 ## Step 7: Create Shell Preview
 
@@ -211,12 +220,14 @@ const user = {
 If design tokens exist, apply them to the shell components:
 
 **Colors:**
+
 - Read `/product/design-system/colors.json`
 - Use primary color for active nav items, key accents
 - Use secondary color for hover states, subtle highlights
 - Use neutral color for backgrounds, borders, text
 
 **Typography:**
+
 - Read `/product/design-system/typography.json`
 - Apply heading font to nav items and titles
 - Apply body font to other text
@@ -229,14 +240,16 @@ Let the user know:
 "I've designed the application shell for **[Product Name]**:
 
 **Created files:**
+
 - `/product/shell/spec.md` — Shell specification
-- `src/shell/components/AppShell.tsx` — Main shell wrapper
-- `src/shell/components/MainNav.tsx` — Navigation component
-- `src/shell/components/UserMenu.tsx` — User menu component
-- `src/shell/components/index.ts` — Component exports
-- `src/shell/ShellPreview.tsx` — Preview wrapper
+- `app/components/shell/AppShell.vue` — Main shell wrapper
+- `app/components/shell/MainNav.vue` — Navigation component
+- `app/components/shell/UserMenu.vue` — User menu component
+- `app/components/shell/index.ts` — Component exports
+- `app/shell/ShellPreview.vue` — Preview wrapper
 
 **Shell features:**
+
 - [Layout pattern] layout
 - Navigation for all [N] sections
 - User menu with avatar and logout

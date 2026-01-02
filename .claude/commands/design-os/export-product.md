@@ -7,11 +7,13 @@ You are helping the user export their complete product design as a handoff packa
 Verify the minimum requirements exist:
 
 **Required:**
+
 - `/product/product-overview.md` — Product overview
 - `/product/product-roadmap.md` — Sections defined
 - At least one section with screen designs in `src/sections/[section-id]/`
 
 **Recommended (show warning if missing):**
+
 - `/product/data-model/data-model.md` — Global data model
 - `/product/design-system/colors.json` — Color tokens
 - `/product/design-system/typography.json` — Typography tokens
@@ -20,6 +22,7 @@ Verify the minimum requirements exist:
 If required files are missing:
 
 "To export your product, you need at minimum:
+
 - A product overview (`/product-vision`)
 - A roadmap with sections (`/product-roadmap`)
 - At least one section with screen designs
@@ -31,6 +34,7 @@ Stop here if required files are missing.
 If recommended files are missing, show warnings but continue:
 
 "Note: Some recommended items are missing:
+
 - [ ] Data model — Run `/data-model` for consistent entity definitions
 - [ ] Design tokens — Run `/design-tokens` for consistent styling
 - [ ] Application shell — Run `/design-shell` for navigation structure
@@ -545,12 +549,12 @@ See `screenshot.png` for the target UI design.
 
 ## Callback Props
 
-| Callback | Description |
-|----------|-------------|
-| `onView` | Called when user clicks to view details |
-| `onEdit` | Called when user clicks to edit |
-| `onDelete` | Called when user clicks to delete |
-| `onCreate` | Called when user clicks to create new |
+| Callback   | Description                             |
+| ---------- | --------------------------------------- |
+| `onView`   | Called when user clicks to view details |
+| `onEdit`   | Called when user clicks to edit         |
+| `onDelete` | Called when user clicks to delete       |
+| `onCreate` | Called when user clicks to create new   |
 
 [Adjust based on actual Props interface]
 ```
@@ -757,6 +761,7 @@ const mockErrorResponse = {
 - Ensure error boundaries catch and display errors gracefully
 - **Always test empty states** — Pass empty arrays to verify helpful empty state UI appears (not blank screens)
 - Test transitions: empty → first item created, last item deleted → empty state returns
+
 ```
 
 ### Guidelines for Writing tests.md
@@ -818,19 +823,19 @@ Neutral text: `text-[neutral]-600 dark:text-[neutral]-400`
 
 ## Google Fonts Import
 
-Add to your HTML `<head>` or CSS:
+Add to your file `app/assets/css/main.css`:
 
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=[Heading+Font]&family=[Body+Font]&family=[Mono+Font]&display=swap" rel="stylesheet">
-```
+@theme {
+    --font-sans: [Font], system-ui, sans-serif;
+  --font-mono:  [Font mono], monospace;
+}
 
 ## Font Usage
 
 - **Headings:** [Heading Font]
 - **Body text:** [Body Font]
 - **Code/technical:** [Mono Font]
+
 ```
 
 ## Step 11: Generate Prompt Files
@@ -1040,6 +1045,7 @@ The test instructions are **framework-agnostic** — they describe WHAT to test,
 ## Step 13: Copy Screenshots
 
 Copy any `.png` files from:
+
 - `product/shell/` → `product-plan/shell/`
 - `product/sections/[section-id]/` → `product-plan/sections/[section-id]/`
 
@@ -1066,15 +1072,18 @@ Let the user know:
 **What's Included:**
 
 **Ready-to-Use Prompts:**
+
 - `prompts/one-shot-prompt.md` — Prompt for full implementation
 - `prompts/section-prompt.md` — Prompt template for section-by-section
 
 **Instructions:**
+
 - `product-overview.md` — Product summary (always provide with instructions)
 - `instructions/one-shot-instructions.md` — All milestones combined
 - `instructions/incremental/` — [N] milestone instructions (foundation, then sections)
 
 **Design Assets:**
+
 - `design-system/` — Colors, fonts, tokens
 - `data-model/` — Entity types and sample data
 - `shell/` — Application shell components

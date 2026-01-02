@@ -11,16 +11,20 @@ Design OS is a **product planning and design tool** that helps users define thei
 When working in Design OS, be aware of two distinct contexts:
 
 ### 1. Design OS Application
+
 The Nuxt application that displays and manages planning files. When modifying the Design OS UI itself:
+
 - Files live in `app/` (components, pages, layouts, composables)
 - Uses the Design OS design system (stone palette, DM Sans, etc.)
 - Provides the interface for viewing specs, screen designs, exports, etc.
 - Built with **Nuxt 4** and **Nuxt UI v4**
 
 ### 2. Product Design (Screen Designs & Exports)
+
 The product you're planning and designing. When creating screen designs and exports:
+
 - Screen design components live in `app/sections/[section-name]/` and `app/shell/`
-- Product definition files live in `public/product/`
+- Product definition files live in `product/`
 - Exports are packaged to `product-plan/` for integration into a separate codebase
 - Follow the design requirements specified in each section's spec
 
@@ -31,26 +35,32 @@ The product you're planning and designing. When creating screen designs and expo
 Design OS follows a structured planning sequence:
 
 ### 1. Product Overview (`/`)
+
 Define your product's core description, the problems it solves, and key features.
-**Output:** `public/product/product-overview.md`
+**Output:** `product/product-overview.md`
 
 ### 2. Product Roadmap (`/`)
+
 Break your product into 3-5 development sections. Each section represents a self-contained area that can be designed and built independently.
-**Output:** `public/product/product-roadmap.md`
+**Output:** `product/product-roadmap.md`
 
 ### 3. Data Model (`/data-model`)
+
 Define the core entities and relationships in your product. This establishes the "nouns" of your system and ensures consistency across sections.
-**Output:** `public/product/data-model/data-model.md`
+**Output:** `product/data-model/data-model.md`
 
 ### 4. Design System (`/design`)
+
 Choose your color palette (from Tailwind) and typography (from Google Fonts). These tokens are applied to all screen designs.
-**Output:** `public/product/design-system/colors.json`, `public/product/design-system/typography.json`
+**Output:** `product/design-system/colors.json`, `product/design-system/typography.json`
 
 ### 5. Application Shell (`/shell/design`)
-Design the persistent navigation and layout that wraps all sections.
-**Output:** `public/product/shell/spec.md`, `app/shell/components/`
 
-### 6. For Each Section:
+Design the persistent navigation and layout that wraps all sections.
+**Output:** `product/shell/spec.md`, `app/shell/components/`
+
+### 6. For Each Section
+
 - `/sections` — List all sections
 - `/sections/[id]` — Define the specification
 - Create sample data and types
@@ -58,6 +68,7 @@ Design the persistent navigation and layout that wraps all sections.
 - Capture screenshots
 
 ### 7. Export (`/export`)
+
 Generate the complete export package with all components, types, and handoff documentation.
 **Output:** `product-plan/`
 
@@ -66,7 +77,7 @@ Generate the complete export package with all components, types, and handoff doc
 ## File Structure
 
 ```
-public/product/                    # Product definition (portable)
+product/                    # Product definition (portable)
 ├── product-overview.md            # Product description, problems/solutions, features
 ├── product-roadmap.md             # List of sections with titles and descriptions
 │
@@ -155,7 +166,7 @@ These rules apply to both the Design OS application and all screen designs/compo
 
 - **Icons**: Use Nuxt UI's icon system which supports Iconify collections (e.g., `i-heroicons-home`).
 
-- **Design System Configuration**: 
+- **Design System Configuration**:
   - Colors configured in `app.config.ts` under `ui.colors`
   - Fonts configured in CSS using `@theme` directive
   - Custom styles in `app/assets/css/main.css` with `@import "@nuxt/ui"`
@@ -248,5 +259,5 @@ The Design OS application itself uses a "Refined Utility" aesthetic:
 - **Auto-imports**: Composables, components, and utilities are auto-imported
 - **Layouts**: Use `app/layouts/` for shared page layouts
 - **Composables**: Data loading logic goes in `composables/` directory
-- **Public Directory**: Static files and markdown content in `public/`
+- **Public Directory**: Static files and markdown content in ``
 - **App Directory**: All application code in `app/` (Nuxt 4 convention)
