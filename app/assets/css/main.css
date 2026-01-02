@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+
+/*
+  Design OS - Nuxt UI Theme
+  Using Nuxt UI's design system with stone palette
+*/
+
+@theme {
+  /* Fonts - DM Sans for clean, geometric type */
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* Custom animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 200ms ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-collapse-down {
+    animation: collapse-down 200ms ease-out;
+  }
+
+  .animate-collapse-up {
+    animation: collapse-up 200ms ease-out;
+  }
+
+  @keyframes collapse-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes collapse-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
