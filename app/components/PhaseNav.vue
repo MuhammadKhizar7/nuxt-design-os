@@ -20,19 +20,19 @@
       <UButton
         :to="phaseInfo.phase.path"
         :class="[
-          'group relative flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all duration-200 whitespace-nowrap',
+          'group relative flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg duration-200 whitespace-nowrap',
           phaseInfo.status === 'current'
             ? 'bg-stone-900 dark:bg-stone-100 text-stone-100 dark:text-stone-900 shadow-sm'
             : phaseInfo.status === 'completed'
               ? 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700'
-              : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800/50'
+              : 'bg-transparent text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800'
         ]"
-        variant="ghost"
       >
         <UIcon
           :name="phaseInfo.phase.icon"
           :class="[
-            'w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110',
+            'w-4 h-4 shrink-0 transition-transform duration-200',
+            phaseInfo.status !== 'current' ? 'group-hover:scale-110' : '',
             phaseInfo.status === 'upcoming' ? 'opacity-60' : ''
           ]"
         />
