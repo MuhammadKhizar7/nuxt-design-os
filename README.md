@@ -14,10 +14,9 @@ All credit for the concept, workflow, and original implementation goes to the te
 
 This version reimagines the original application within the Nuxt 3 ecosystem, introducing several key changes and leveraging Nuxt's powerful features.
 
-- **Framework:** The original Vite-based Vue application has been migrated to the **Nuxt 3** framework, providing a robust, production-ready foundation.
+- **Framework:** The original Vite-based React application has been migrated to the **Nuxt 3** framework, providing a robust, production-ready foundation.
 - **UI Components:** We've replaced the original UI components with **[@nuxt/ui](https://ui.nuxt.com/)**. This provides a sleek, modern, and highly customizable set of components that are deeply integrated with Nuxt, supporting features like themeability and dark mode out-of-the-box.
 - **File-based Routing:** The project now leverages Nuxt's file-based routing system, simplifying page management and creating a more intuitive project structure.
-- **Server-Side Rendering (SSR):** It benefits from Nuxt's Server-Side Rendering capabilities, which can lead to better performance and improved SEO.
 - **Data Management with Composables:** Data fetching and state logic have been refactored into Nuxt `composables` (e.g., `useProductData`, `useSectionData`) for better organization, reusability, and type safety across the application.
 
 ## Core Features (Inherited from Design OS)
