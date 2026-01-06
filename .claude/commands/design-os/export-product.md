@@ -1051,23 +1051,23 @@ Copy any `.png` files from:
 
 ## Step 14: Create Zip File
 
-After generating all the export files, create a zip archive of the public folder:
+After generating all the export files, create a zip archive of the `product-plan/` directory and place it inside the `public/` folder so it can be downloaded.
 
 ```bash
 # Remove any existing zip file
-rm -f product-plan.zip
+rm -f public/product-plan.zip
 
-# Create the zip file
-cd . && zip -r product-plan.zip public/
+# Create the zip file containing the product-plan directory
+zip -r public/product-plan.zip product-plan/
 ```
 
-This creates `product-plan.zip` in the project public, which will be available for download on the Export page.
+This creates `public/product-plan.zip`, which will be available for download on the Export page.
 
 ## Step 15: Confirm Completion
 
 Let the user know:
 
-"I've created the complete export package at `product-plan/` and `product-plan.zip`.
+"I've created the complete export package. The unzipped version is at `product-plan/` and a downloadable archive is at `public/product-plan.zip`.
 
 **What's Included:**
 
@@ -1091,7 +1091,7 @@ Let the user know:
 
 **Download:**
 
-Restart your dev server and visit the Export page to download `product-plan.zip`.
+Restart your dev server and visit the Export page to download `product-plan.zip` from the public directory.
 
 **How to Use:**
 

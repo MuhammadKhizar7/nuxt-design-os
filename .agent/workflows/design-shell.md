@@ -176,7 +176,7 @@ Vue auto-imports handle this.
 - Use Tailwind CSS for styling
 - Use `nuxt ui UIcon` for icons
 
-## Step 7: Create Shell Preview
+## Step 7: Create Shell Preview (do not needed this now just ignore it)
 
 Create `app/pages/shell/ShellPreview.vue` — a preview wrapper for viewing the shell in Design OS:
 
@@ -231,7 +231,20 @@ If design tokens exist, apply them to the shell components:
 - Read `/product/design-system/typography.json`
 - Apply heading font to nav items and titles
 - Apply body font to other text
-- Include Google Fonts import in the preview
+- Include Google Fonts add font in main.css
+
+```css
+/* here is example */
+/* app/assets/css/main.css */
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --font-sans: 'Public Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+```
 
 ## Step 9: Confirm Completion
 
