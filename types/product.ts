@@ -88,10 +88,24 @@ export interface ShellInfo {
 // Combined Product Data
 // =============================================================================
 
+// =============================================================================
+// Combined Product Data
+// =============================================================================
+
+export interface SectionProgress {
+  hasSpec: boolean
+  hasData: boolean
+  hasScreenDesigns: boolean
+  screenDesignCount: number
+  hasScreenshots: boolean
+  screenshotCount: number
+}
+
 export interface ProductData {
   overview: ProductOverview | null
   roadmap: ProductRoadmap | null
   dataModel: DataModel | null
   designSystem: DesignSystem | null
   shell: ShellInfo | null
+  sectionProgress?: Record<string, SectionProgress>
 }

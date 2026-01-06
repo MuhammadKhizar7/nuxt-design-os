@@ -204,23 +204,13 @@ export interface Invoice {
   lineItems: LineItem[]
 }
 
-// =============================================================================
-// Component Props
-// =============================================================================
-
-export interface InvoiceListProps {
-  /** The list of invoices to display */
-  invoices: Invoice[]
-}
 ```
 
 ### Naming Conventions
 
-- Use PascalCase for interface names: `Invoice`, `LineItem`, `InvoiceListProps`
+- Use PascalCase for interface names: `Invoice`, `LineItem`
 
 - Use camelCase for property names: `clientName`, `dueDate`, `lineItems`
-
-- Props interface should be named `[SectionName]Props` (e.g., `InvoiceListProps`)
 
 - **Match entity names from the global data model if one exists**
 
@@ -237,7 +227,6 @@ Let the user know:
 The types include:
 
 - `[Entity]` - The main data type
-- `[SectionName]Props` - Props interface for the component (includes callbacks for [list actions])
 
 When you're ready, run `/design-screen` to create the screen design for this section."
 
@@ -249,5 +238,4 @@ When you're ready, run `/design-screen` to create the screen design for this sec
 - Keep field names clear and TypeScript-friendly (camelCase)
 - The data structure should directly map to the spec's user flows
 - Always generate types.ts alongside data.json
-- Callback props should cover all actions mentioned in the spec
 - **Use entity names from the global data model for consistency across sections**

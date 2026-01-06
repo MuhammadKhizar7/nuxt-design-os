@@ -15,15 +15,14 @@ const designName = computed(() => route.params.designName as string)
 const ScreenComponent = shallowRef<any>(null)
 const error = shallowRef<string | null>(null)
 
-// Wrap section data in computed to ensure reactivity
-const sectionState = computed(() => useSectionData(sectionId.value))
-const sectionData = computed(() => sectionState.value.sectionData)
+// Use reactive composable directly
+const { sectionData } = useSectionData(sectionId)
 
 // Check if section should use shell (default to true if shell components exist)
 // In a real app, this would check spec.md
 const shouldUseShell = computed(() => {
   // Simple check for now - can be expanded later to check sectionData.specParsed
-  return true 
+  return true
 })
 
 const componentProps = computed(() => sectionData.value.data || {})
@@ -31,7 +30,7 @@ const componentProps = computed(() => sectionData.value.data || {})
 async function loadComponent() {
   ScreenComponent.value = null
   error.value = null
-  
+
   if (!sectionId.value || !designName.value) return
 
   try {
@@ -62,7 +61,7 @@ onMounted(() => {
   window.addEventListener('storage', (e) => {
     if (e.key === 'nuxt-ui-color-mode') applyTheme()
   })
-  
+
   // Also poll since storage event doesn't fire in same tab/window for some setups
   const interval = setInterval(applyTheme, 500)
   return () => clearInterval(interval)

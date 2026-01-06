@@ -34,24 +34,24 @@ import { computed } from 'vue'
 // import { useProductData } from '~/app/composables/useProductData'
 
 const { data: productData, hasProductOverview, hasProductRoadmap } = useProductData()
-console.log(productData)
+console.log(productData.value)
 
-const allStepsComplete = computed(() => hasProductOverview && hasProductRoadmap)
+const allStepsComplete = computed(() => hasProductOverview.value && hasProductRoadmap.value)
 
 const stepStatuses = computed(() => {
   const statuses: ('completed' | 'current' | 'upcoming')[] = []
 
   // Step 1: Product Vision
-  if (hasProductOverview) {
+  if (hasProductOverview.value) {
     statuses.push('completed')
   } else {
     statuses.push('current')
   }
 
   // Step 2: Roadmap
-  if (hasProductRoadmap) {
+  if (hasProductRoadmap.value) {
     statuses.push('completed')
-  } else if (hasProductOverview) {
+  } else if (hasProductOverview.value) {
     statuses.push('current')
   } else {
     statuses.push('upcoming')

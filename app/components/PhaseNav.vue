@@ -86,9 +86,6 @@ const phases: PhaseConfig[] = [
 
 const route = useRoute()
 
-// Use composable for real data
-// import { useProductData } from '~/app/composables/useProductData'
-
 import { useProductData } from '~/composables/useProductData'
 import { useSectionData } from '~/composables/useSectionData'
 
@@ -126,9 +123,9 @@ const phaseInfos = computed<PhaseInfo[]>(() => {
   }
 
   const phaseComplete: Record<Phase, boolean> = {
-    'product': !!(hasProductOverview && hasProductRoadmap),
-    'data-model': !!hasDataModel,
-    'design': !!(hasDesignSystem && hasShell),
+    'product': !!(hasProductOverview.value && hasProductRoadmap.value),
+    'data-model': !!hasDataModel.value,
+    'design': !!(hasDesignSystem.value && hasShell.value),
     'sections': allSectionsComplete.value,
     'export': exportZipAvailable.value,
   }

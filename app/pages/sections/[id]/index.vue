@@ -10,20 +10,17 @@ const sectionId = computed(() => route.params.id as string)
 
 const { data: productData } = useProductData()
 
-// Wrap section data in computed to ensure reactivity when sectionId changes
-const sectionState = computed(() => {
-  return useSectionData(sectionId.value)
-})
+// Use the reactive composable properly - pass the ref directly
+const {
+  sectionData,
+  hasSpec,
+  hasData,
+  hasScreenDesigns,
+  hasScreenshots
+} = useSectionData(sectionId)
 
-// Access flags and data from the reactive sectionState
-const sectionData = computed(() => sectionState.value.sectionData)
-const hasSpec = computed(() => sectionState.value.hasSpec)
-const hasData = computed(() => sectionState.value.hasData)
-const hasScreenDesigns = computed(() => sectionState.value.hasScreenDesigns)
-const hasScreenshots = computed(() => sectionState.value.hasScreenshots)
-
-const section = computed(() => productData.roadmap?.sections.find(s => s.id === sectionId.value))
-const sections = computed(() => productData.roadmap?.sections || [])
+const section = computed(() => productData.value.roadmap?.sections.find(s => s.id === sectionId.value))
+const sections = computed(() => productData.value.roadmap?.sections || [])
 const currentIndex = computed(() => sections.value.findIndex(s => s.id === sectionId.value))
 const isLastSection = computed(() => currentIndex.value === sections.value.length - 1 || currentIndex.value === -1)
 const nextSection = computed(() => !isLastSection.value ? sections.value[currentIndex.value + 1] : null)
@@ -33,7 +30,7 @@ const requiredStepsComplete = computed(() => hasSpec.value && hasData.value && h
 const stepStatuses = computed(() => {
   const steps = [hasSpec.value, hasData.value, hasScreenDesigns.value, hasScreenshots.value]
   const firstIncomplete = steps.findIndex(done => !done)
-  
+
   return steps.map((done, index) => {
     if (done) return 'completed'
     if (index === firstIncomplete) return 'current'
@@ -55,13 +52,7 @@ function navigateToNext() {
     <!-- Page intro -->
     <div class="mb-8">
       <div class="flex items-center gap-3 mb-2">
-        <UButton
-          to="/sections"
-          icon="i-lucide-arrow-left"
-          variant="ghost"
-          color="neutral"
-          size="sm"
-        >
+        <UButton to="/sections" icon="i-lucide-arrow-left" variant="ghost" color="neutral" size="sm">
           Back to Sections
         </UButton>
       </div>
@@ -102,26 +93,26 @@ function navigateToNext() {
             </h3>
           </div>
         </template>
-        
+
         <div class="divide-y divide-stone-100 dark:divide-stone-800 -mx-6 -my-5">
-          <NuxtLink
-            v-for="design in sectionData.screenDesigns"
-            :key="design.name"
+          <NuxtLink v-for="design in sectionData.screenDesigns" :key="design.name"
             :to="`/sections/${sectionId}/screen-designs/${design.name}`"
-            class="flex items-center justify-between gap-4 px-6 py-4 hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors group"
-          >
+            class="flex items-center justify-between gap-4 px-6 py-4 hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors group">
             <div class="flex items-center gap-3 min-w-0">
-              <div class="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 border border-stone-200 dark:border-stone-700">
+              <div
+                class="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 border border-stone-200 dark:border-stone-700">
                 <UIcon name="i-lucide-layout" class="w-5 h-5 text-stone-600 dark:text-stone-300" />
               </div>
               <div class="truncate">
-                <span class="font-medium text-stone-900 dark:text-stone-100 block group-hover:text-primary-600 dark:group-hover:text-primary-400">
+                <span
+                  class="font-medium text-stone-900 dark:text-stone-100 block group-hover:text-primary-600 dark:group-hover:text-primary-400">
                   {{ design.name }}
                 </span>
                 <span class="text-xs text-stone-500">Component design</span>
               </div>
             </div>
-            <UIcon name="i-lucide-chevron-right" class="w-5 h-5 text-stone-400 dark:text-stone-500 shrink-0 transition-transform group-hover:translate-x-0.5" />
+            <UIcon name="i-lucide-chevron-right"
+              class="w-5 h-5 text-stone-400 dark:text-stone-500 shrink-0 transition-transform group-hover:translate-x-0.5" />
           </NuxtLink>
         </div>
       </UCard>
@@ -141,13 +132,14 @@ function navigateToNext() {
             <p class="text-sm text-stone-500 dark:text-stone-400 mb-6">
               Capture screenshots of your screen designs for documentation and preview.
             </p>
-            <div class="bg-stone-50 dark:bg-stone-900 rounded-lg px-4 py-3 w-full border border-stone-200 dark:border-stone-800">
+            <div
+              class="bg-stone-50 dark:bg-stone-900 rounded-lg px-4 py-3 w-full border border-stone-200 dark:border-stone-800">
               <p class="text-xs font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wider mb-2">
                 Available Command
               </p>
               <code class="text-sm font-mono text-primary-600 dark:text-primary-400">
-                /screenshot-design
-              </code>
+            /screenshot-design
+          </code>
             </div>
           </div>
         </UCard>
@@ -163,35 +155,22 @@ function navigateToNext() {
             </h3>
           </div>
         </template>
-        
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div v-for="screenshot in sectionData.screenshots" :key="screenshot.name" class="group relative">
-            <div class="aspect-video rounded-xl overflow-hidden bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
-              <img
-                :src="screenshot.url"
-                :alt="screenshot.name"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+            <div
+              class="aspect-video rounded-xl overflow-hidden bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
+              <img :src="screenshot.url" :alt="screenshot.name"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <!-- Overlay on hover -->
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                <UButton
-                  :href="screenshot.url"
-                  target="_blank"
-                  icon="i-lucide-eye"
-                  size="sm"
-                  color="white"
-                  variant="solid"
-                >
+              <div
+                class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <UButton :href="screenshot.url" target="_blank" icon="i-lucide-eye" size="sm" color="white"
+                  variant="solid">
                   View
                 </UButton>
-                <UButton
-                  :href="screenshot.url"
-                  :download="`${screenshot.name}.png`"
-                  icon="i-lucide-download"
-                  size="sm"
-                  color="white"
-                  variant="solid"
-                >
+                <UButton :href="screenshot.url" :download="`${screenshot.name}.png`" icon="i-lucide-download" size="sm"
+                  color="white" variant="solid">
                   Download
                 </UButton>
               </div>
@@ -209,37 +188,16 @@ function navigateToNext() {
     <!-- Step 5: Next Steps -->
     <StepIndicator v-if="requiredStepsComplete" :step="5" status="current" is-last>
       <div class="space-y-4">
-        <UButton
-          v-if="nextSection"
-          block
-          size="xl"
-          color="black"
-          icon="i-lucide-arrow-right"
-          trailing
-          @click="navigateToNext"
-        >
+        <UButton v-if="nextSection" block size="xl" color="black" icon="i-lucide-arrow-right" trailing
+          @click="navigateToNext">
           Continue to {{ nextSection.title }}
         </UButton>
-        <UButton
-          v-else
-          block
-          size="xl"
-          color="black"
-          icon="i-lucide-layout-list"
-          @click="router.push('/sections')"
-        >
+        <UButton v-else block size="xl" color="black" icon="i-lucide-layout-list" @click="router.push('/sections')">
           Back to All Sections
         </UButton>
 
-        <UButton
-          v-if="nextSection"
-          block
-          size="lg"
-          variant="ghost"
-          color="neutral"
-          icon="i-lucide-layout-list"
-          to="/sections"
-        >
+        <UButton v-if="nextSection" block size="lg" variant="ghost" color="neutral" icon="i-lucide-layout-list"
+          to="/sections">
           View All Sections
         </UButton>
       </div>

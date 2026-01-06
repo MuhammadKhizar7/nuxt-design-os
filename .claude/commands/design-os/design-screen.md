@@ -72,7 +72,7 @@ Create the main component file at `app/components/sections/[section-id]/[ViewNam
 
 ```vue
 <script setup lang="ts">
-import type { X } from '@/types/section'
+import type { X } from '~~/types/section'
 // ...
 </script>
 ```

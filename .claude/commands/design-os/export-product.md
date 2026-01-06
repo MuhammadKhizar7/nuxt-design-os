@@ -1051,17 +1051,17 @@ Copy any `.png` files from:
 
 ## Step 14: Create Zip File
 
-After generating all the export files, create a zip archive of the product-plan folder:
+After generating all the export files, create a zip archive of the public folder:
 
 ```bash
 # Remove any existing zip file
 rm -f product-plan.zip
 
 # Create the zip file
-cd . && zip -r product-plan.zip product-plan/
+cd . && zip -r product-plan.zip public/
 ```
 
-This creates `product-plan.zip` in the project root, which will be available for download on the Export page.
+This creates `product-plan.zip` in the project public, which will be available for download on the Export page.
 
 ## Step 15: Confirm Completion
 

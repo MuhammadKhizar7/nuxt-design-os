@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useProductData } from '~/composables/useProductData'
-
 const {
   hasProductOverview,
   hasProductRoadmap,
@@ -13,7 +12,8 @@ const {
   sectionStats
 } = useProductData()
 
-const hasSections = computed(() => sectionStats.withScreenDesigns > 0)
+const hasSections = computed(() => sectionStats.value?.withScreenDesigns > 0)
+
 const requiredComplete = computed(() => hasProductOverview && hasProductRoadmap && hasSections.value)
 
 const exportDescription = computed(() => exportZipAvailable.value
@@ -54,41 +54,13 @@ const exportItems = [
   }
 ]
 
-import { forceExportAvailable } from '~/composables/useProductData'
-
-const isGenerating = ref(false)
 const toast = useToast()
-
-onMounted(() => {
-  isGenerating.value = false
-})
 
 function copyCommand() {
   navigator.clipboard.writeText('/export-product')
   toast.add({ title: 'Copied to clipboard!', color: 'green' })
 }
 
-async function simulateExport() {
-  isGenerating.value = true
-
-  try {
-    // Simulate network delay / processing
-    await new Promise(resolve => setTimeout(resolve, 2000))
-
-    // Simulate successful generation for current session
-    forceExportAvailable.value = true
-
-    try {
-      toast.add({ title: 'Export Package Generated!', description: 'Ready for download.', color: 'green' })
-    } catch (e) {
-      console.error('Toast error (ignored):', e)
-    }
-  } catch (error) {
-    console.error('Export simulation failed:', error)
-  } finally {
-    isGenerating.value = false
-  }
-}
 </script>
 
 <template>
@@ -206,27 +178,11 @@ async function simulateExport() {
             <UButton variant="ghost" color="white" icon="i-lucide-copy" size="sm"
               class="opacity-30 group-hover:opacity-100 transition-opacity" @click="copyCommand" />
           </div>
-
-          <div class="relative z-10 flex flex-col items-center">
-            <!-- DEBUG INFO -->
-            <!-- <div class="text-xs text-red-500 bg-black/50 p-2 mb-2 absolute -top-12">
-               Gen: {{ isGenerating }} | Force: {{ forceExportAvailable }} | Zip: {{ exportZipAvailable }}
-             </div> -->
-
-            <button type="button"
-              class="font-bold px-8 py-3 rounded-xl hover:scale-105 transition-all text-stone-900 bg-white flex items-center gap-2 shadow-lg hover:shadow-xl active:scale-95 opacity-100 cursor-pointer"
-              @click="simulateExport">
-              <UIcon v-if="isGenerating" name="i-lucide-loader-2" class="w-5 h-5 animate-spin" />
-              <UIcon v-else name="i-lucide-package" class="w-5 h-5" />
-              {{ isGenerating ? 'Generating...' : 'Generate Export Package' }}
-            </button>
-            <p class="text-xs text-stone-500 mt-4">(Simulates running the command)</p>
-          </div>
         </div>
       </div>
 
       <!-- Manifest -->
-      <div class="space-y-8 pt-8">
+      <div class="space-y-8 pt-8" v-if="exportZipAvailable && exportZipUrl">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-black text-stone-400 uppercase tracking-widest flex items-center gap-2">
             <UIcon name="i-lucide-folder-tree" class="w-4 h-4" />
